@@ -1,0 +1,108 @@
+provider: onomeo
+label:
+  en_US: onomeo
+description:
+  en_US: Claude, GPT, Gemini, DeepSeek, Kimi and GLM models behind one API key, with per-key spending caps and failover across free upstreams.
+  zh_Hans: 一个 API Key 使用 Claude、GPT、Gemini、DeepSeek、Kimi 与 GLM 模型，支持按密钥设置消费上限，免费线路多上游自动切换。
+icon_small:
+  en_US: icon_small.svg
+icon_large:
+  en_US: icon_large.svg
+background: "#F5F5F5"
+help:
+  title:
+    en_US: Get your API key from onomeo
+    zh_Hans: 从 onomeo 获取 API Key
+  url:
+    en_US: https://onomeo.com/dashboard
+supported_model_types:
+  - llm
+configurate_methods:
+  - predefined-model
+  - customizable-model
+provider_credential_schema:
+  credential_form_schemas:
+    - variable: api_key
+      label:
+        en_US: API Key
+      type: secret-input
+      required: true
+      placeholder:
+        en_US: Enter your onomeo API key
+        zh_Hans: 在此输入您的 onomeo API Key
+model_credential_schema:
+  model:
+    label:
+      en_US: Model Name
+      zh_Hans: 模型名称
+    placeholder:
+      en_US: Enter a model ID listed by GET https://onomeo.com/v1/models, e.g. deepseek-v4.1-flash
+      zh_Hans: 输入 GET https://onomeo.com/v1/models 列出的模型 ID，例如 deepseek-v4.1-flash
+  credential_form_schemas:
+    - variable: api_key
+      label:
+        en_US: API Key
+      type: secret-input
+      required: true
+      placeholder:
+        en_US: Enter your onomeo API key
+        zh_Hans: 在此输入您的 onomeo API Key
+    - variable: context_size
+      label:
+        en_US: Model context size
+        zh_Hans: 模型上下文长度
+      type: text-input
+      required: true
+      default: "128000"
+      placeholder:
+        en_US: Enter the context size
+        zh_Hans: 输入上下文长度
+    - variable: max_tokens
+      label:
+        en_US: Upper bound for max tokens
+        zh_Hans: 最大 token 上限
+      type: text-input
+      required: false
+      default: "8192"
+    - variable: function_calling_type
+      label:
+        en_US: Function calling
+        zh_Hans: 函数调用
+      type: select
+      required: false
+      default: tool_call
+      options:
+        - value: no_call
+          label:
+            en_US: Not Support
+            zh_Hans: 不支持
+        - value: tool_call
+          label:
+            en_US: Support
+            zh_Hans: 支持
+    - variable: vision_support
+      label:
+        en_US: Vision Support
+        zh_Hans: 是否支持 Vision
+      type: select
+      required: false
+      default: no_support
+      options:
+        - value: support
+          label:
+            en_US: "Yes"
+            zh_Hans: 是
+        - value: no_support
+          label:
+            en_US: "No"
+            zh_Hans: 否
+models:
+  llm:
+    predefined:
+      - models/llm/*.yaml
+    position: models/llm/_position.yaml
+extra:
+  python:
+    provider_source: provider/onomeo.py
+    model_sources:
+      - models/llm/llm.py

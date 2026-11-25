@@ -1,0 +1,39 @@
+version: 0.0.1
+type: plugin
+author: onomeo
+name: onomeo
+label:
+  en_US: onomeo
+  zh_Hans: onomeo
+description:
+  en_US: One OpenAI-compatible API key for Claude, GPT, Gemini, DeepSeek, Kimi and GLM models, with per-key spending caps, automatic failover across free upstreams and content filtering.
+  zh_Hans: 一个 OpenAI 兼容 API Key 使用 Claude、GPT、Gemini、DeepSeek、Kimi 与 GLM 模型，支持按密钥设置消费上限、免费线路多上游自动切换与内容过滤。
+icon: icon_small.svg
+created_at: "2026-11-25T12:00:00Z"
+tags:
+  - other
+resource:
+  memory: 268435456
+  permission:
+    model:
+      enabled: true
+      llm: true
+plugins:
+  models:
+    - provider/onomeo.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+  minimum_dify_version: 1.0.0
+privacy: PRIVACY.md
+contact: hello@onomeo.com
+network:
+  domains:
+    - onomeo.com
+repo: https://github.com/Owaid0723666/dify-plugin-onomeo
